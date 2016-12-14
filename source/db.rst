@@ -16,6 +16,13 @@ Salles
 *  Lister toutes les salles réservées par un utilisateur donné sur une certaine période spécifiée par une date/heure de début et une date/heure de fin
 *  Lister toutes les salles libres à une certaine période de la grille horaire (date/période)
 
+Utilisateurs
+------------
+
+*  Insérer un nouvel utilisateur
+*  Vérifier le mot de passe d'un utilisateur pour l'authentifier
+*  Modifier les informations sur un utilisateur (Nom, prénom, courriel, ...)
+
 
 Schéma conceptuel (entité associations)
 =======================================
