@@ -228,6 +228,8 @@ ssh-key-publish:
 puthtml: cleanhtml html
 	rsync -raz build/html/* webpub@donner-online.ch:/home/webpub/html/oci/reservation/ --progress --delete
 
+deploy: puthtml
+
 putcorrige:
 	rsync -raz build/corrige/html/* webpub@donner-online.ch:/home/webpub/html/oci/reservation/corrige/ --progress --delete
 

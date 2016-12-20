@@ -53,7 +53,7 @@ Analyse des besoins
 Ensembles d'entités
 -------------------
 
-*  Le système de réservation comporte au minimum les ensembles d'entités suivants : ``Room``, ``User``, ``Rule``, ``Booking``, ``StudentGroup``
+*  Le système de réservation comporte au minimum les ensembles d'entités suivants : ``Room``, ``User``, ``Reservation``, ``StudentGroup``
 
 Utilisateurs
 ------------
@@ -88,11 +88,9 @@ Réservations
 
 *  Une réservation est effectuée pour une et une seule salle. Une salle peut être concernée par 0, 1 ou plusieurs réservations. Il ne peut cependant pas y avoir deux réservations pour la même salle lors d'une même période horaire.
 
-*  Les réservations de type "rule" sont liées avec un jour de la semaine, une période de récurrence (hebdomadaire, toutes les deux semaines, ...) ainsi qu'une ou plusieurs plages horaires contigües. Elles sont caractérisées par une date de début de validité et de fin de validité.
+*  Les réservations sont toutes implémentées comme des règles de récurrence, y compris les réservations ponctuelles uniques. Celles-ci sont simplement des règles de récurrence ne faisant intervenir qu'une seule récurrence (date de début de la récurrence identique à la date de fin de la récurrence).
 
-*  Les réservations de type "booking" (ponctuelles) sont également caractérisées par les données suivantes : date de réservation, plage horaire de début, durée (en nombre de plages horaires).
-
-*
+*  Lors de la suppression d'une réservation, celle-ci ne doit pas être supprimée physiquement de la base de données mais uniquement désactivée. Cela permet notamment au secrétariat de connaître exactement tous les "mouvements" qui se sont effectués sur une salle.
 
 Grille horaire et plages
 ------------------------
@@ -107,10 +105,45 @@ La semaine est subdivisée en jours et chaque jour est divisé en plages horaire
 Schéma conceptuel (entités-associations)
 =======================================
 
+Voici le schéma conceptuel élaboré en classe dans la phase de mise en commun des
+différentes idées :
+
+.. raw:: html
+
+   <script type="text/javascript" language="javascript" src="https://creately.com/player/createlyplayerstart.js"></script>
+   <div id="creately-container-iwet2er11-Gaoyc5cBiGFB8T5TOzXqOvDvXcQ="></div>
+   <script type="text/javascript">
+   createlyPlayerStart( {
+   container: "creately-container-iwet2er11-Gaoyc5cBiGFB8T5TOzXqOvDvXcQ=",
+   docid :"iwet2er11-Gaoyc5cBiGFB8T5TOzXqOvDvXcQ=",
+   title :"Document 1",
+   width :600,height :400,bgcolor :"#eeeeee"
+   } );</script>
+
+
+.. .. figure:: files/ea-diagram/version1a.png
+..    :align: center
+..    :width: 100%
+..
+..    Schéma entité-associations de la base de données à implémenter
+
+
+Commentaires sur le schéma EA
+-----------------------------
+
+*  Dans ce modèle, il n'y a plus qu'une sorte de réservation : les réservations récurrentes. La raison est que les réservations ponctuelles sont comme des règles récurrente qui ne contiennent qu'une seule répétition à une date fixe (``start_date == end_date``).
+
+*  Il y a deux liens différents entre la table ``Reservation`` et la table ``User`` qui ont une signification différente.
+
+   *  Le lien ``Owns`` entre les ensembles d'entités ``Reservation`` et ``User`` représente l'utilisateur de la base de données qui possède la réservation. Dans le cas des règles de récurrence liées au cours habituels, c'est le secrétariat (administration) qui possède la règle de récurrence et les professeurs ne peuvent pas y toucher.
+
+   *  Le lien ``benefits`` indique le ou les utilisateurs qui bénéficient de la réservation. Dans le cas d'un cours planifié par le système EDT et inscrit comme une réservation récurrente appartenant à l'administration, le ou les bénéficiaires sont le ou les enseignants qui donnent le cours à ce moment.
 
 
 Schéma relationnel
 ==================
+
+Le schéma relationnel représente les tables à créer dans la base de données ainsi que les liens qu'elles entretiennent entre elles. Celui-ci a été créé à l'aide de MySQLWorkbench même si la base de données finale sera probablement une base de données PostgreSQL.
 
 
 Instructions DDL
