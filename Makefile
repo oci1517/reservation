@@ -238,3 +238,9 @@ setup:
 
 youtube-patch:
 	curl https://gist.githubusercontent.com/donnerc/2df4c5daea4c2b92312dec524bb00194/raw/b412c7424e4635f816f9a2f95cdd2095b476b7ec/youtube.py > venv/lib/python3.4/site-packages/sphinxcontrib/youtube/youtube.py
+
+devfiles:
+	curl http://flask-starter-donnerc.c9users.io/static/erd.png > source/files/erd.png
+	curl http://flask-starter-donnerc.c9users.io/static/rel.png > source/files/rel.png
+	curl http://flask-starter-donnerc.c9users.io/static/data-dev-ddl.sql > source/files/data-dev-ddl.sql
+	curl https://raw.githubusercontent.com/csud-reservation/flask-backend/master/app/models.py > source/files/models.py

@@ -4,4 +4,7 @@ build
 __pycache__
 
 
-oci-info-theo.pdf
+*.pdf
+
+tags
+.vscode

@@ -26,6 +26,14 @@ Le professeur ne peut modifier que les réservations qu'il a lui-même effectué
 • Notification de courriel pour signaler des modifications faites par admin
 Gestion des conflits ==> pas de doublon
 
+User Stories
+============
 
-API HTTP Rest
-===
+*   Un professeur peut se loguer dans le système en insérant son courriel edufr.ch et son mot de passe.
+
+*   il est alors redirigé vers la page d'accueil du système de réservation qui permet de choisir entre les actions suivantes
+
+    *   Rechercher une salle libre
+    *   Effectuer une réservation
+    *   Modifier son profil (courriel, mot de passe, no de tel)
+    *   Se déconnecter
